@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Student Support</title>
+    <link
+        rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo">
+                    🎓
+                </div>
+                <div>
+                    <h1>University Student Support</h1>
+                    <p>
+                        Your AI-powered assistant for university-related questions
+                    </p>
+                </div>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span>
+                AI Assistant Online
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="main-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h2>What can I ask?</h2>
+                    <p class="sidebar-description">
+                        Ask questions about your university academics
+                        and student services.
+                    </p>
+                    <div class="topic-list">
+                        <button class="topic">
+                            📚 Courses
+                        </button>
+                        <button class="topic">
+                            📝 Assignments
+                        </button>
+                        <button class="topic">
+                            📅 Examinations
+                        </button>
+                        <button class="topic">
+                            💰 Fees
+                        </button>
+                        <button class="topic">
+                            📊 Attendance
+                        </button>
+                        <button class="topic">
+                            📋 Results
+                        </button>
+                        <button class="topic">
+                            🕐 Timetable
+                        </button>
+                        <button class="topic">
+                            📖 Library
+                        </button>
+                        <button class="topic">
+                            🏠 Hostel
+                        </button>
+                        <button class="topic">
+                            🎓 Scholarships
+                        </button>
+                    </div>
+                </div>
+                <div class="technology-card">
+                    <h3>Technology</h3>
+                    <div class="tech-item">
+                        <span>🤖</span>
+                        <span>Gemini AI</span>
+                    </div>
+                    <div class="tech-item">
+                        <span>🔎</span>
+                        <span>RAG</span>
+                    </div>
+                    <div class="tech-item">
+                        <span>🗂️</span>
+                        <span>FAISS</span>
+                    </div>
+                    <div class="tech-item">
+                        <span>🐍</span>
+                        <span>Python / Flask</span>
+                    </div>
+                </div>
+            </aside>
+            <!-- Chat Area -->
+            <section class="chat-container">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="assistant-avatar">
+                        🤖
+                    </div>
+                    <div>
+                        <h2>
+                            University Assistant
+                        </h2>
+                        <p>
+                            Ask me anything about university student support
+                        </p>
+                    </div>
+                </div>
+                <!-- Chat Messages -->
+                <div
+                    id="chatBox"
+                    class="chat-box"
+                >
+                    <div class="message bot">
+                        <div class="avatar">
+                            🤖
+                        </div>
+                        <div class="message-content">
+                            <div class="message-name">
+                                University Assistant
+                            </div>
+                            <p>
+                                Hello! 👋
+                            </p>
+                            <p>
+                                I am your University Student Support Chatbot.
+                            </p>
+                            <p>
+                                You can ask me about courses, assignments,
+                                examinations, fees, attendance, results,
+                                timetable, library, hostel and scholarships.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Input -->
+                <div class="input-section">
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="userInput"
+                            placeholder="Ask your university question..."
+                            autocomplete="off">
+                        <button
+                            id="sendButton"
+                            type="button">
+                            Send
+                        </button>
+                    </div>
+                    <p class="input-hint">
+                        AI-generated answers are based on the university
+                        support knowledge base.
+                    </p>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                AI-powered student support
+                <span>•</span>
+                RAG + FAISS + Gemini
+            </p>
+        </footer>
+    </div>
+    <script
+        src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+</body>
+</html>
