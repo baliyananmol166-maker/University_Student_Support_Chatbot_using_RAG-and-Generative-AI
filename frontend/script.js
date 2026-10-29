@@ -28,9 +28,10 @@ function formatBotMessage(message) {
 
     // Remove Markdown formatting characters left by the AI.
     text = text
-        .replace(/\\([*_[\]()])/g, "$1")
-        .replace(/\*\*(.*?)\*\*/g, "$1")
-        .replace(/(^|[\s])\*([^*\n]+)\*/g, "$1$2");
+    .replace(/\\([*_[\]()])/g, "$1")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/(^|\s)\\?\* (?=\S)/g, "$1• ")
+    .replace(/(^|\s)- (?=\S)/g, "$1• ");
 
     // Convert HTTP(S) URLs into safe clickable links.
     const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
