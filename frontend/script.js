@@ -11,13 +11,31 @@ function formatBotMessage(message) {
     const content = document.createElement("div");
     content.className = "message-text";
 
-    // Render as plain text first, avoiding unsafe HTML.
-    content.textContent = message;
+    let text = String(message || "");
 
-    // Convert only recognized HTTP(S) URLs into clickable links.
+    // Clean malformed Markdown links.
+    // Example: [URL](URL) becomes URL.
+    for (let i = 0; i < 5; i++) {
+        text = text.replace(
+            /\[([^\]]*)\]\((https?:\/\/[^)\s]+)\)/g,
+            function (_, label, url) {
+                return /^https?:\/\//i.test(label)
+                    ? url
+                    : `${label} (${url})`;
+            }
+        );
+    }
+
+    // Remove Markdown formatting characters left by the AI.
+    text = text
+        .replace(/\\([*_[\]()])/g, "$1")
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .replace(/(^|[\s])\*([^*\n]+)\*/g, "$1$2");
+
+    // Convert HTTP(S) URLs into safe clickable links.
     const urlPattern = /https?:\/\/[^\s<>"')\]]+/g;
-    const text = content.textContent;
     const fragment = document.createDocumentFragment();
+
     let lastIndex = 0;
     let match;
 
@@ -25,14 +43,16 @@ function formatBotMessage(message) {
         let url = match[0];
         let trailing = "";
 
-        // Remove common punctuation accidentally attached to a URL.
+        // Keep punctuation outside the URL.
         while (/[.,!?;:]$/.test(url)) {
             trailing = url.slice(-1) + trailing;
             url = url.slice(0, -1);
         }
 
         fragment.appendChild(
-            document.createTextNode(text.slice(lastIndex, match.index))
+            document.createTextNode(
+                text.slice(lastIndex, match.index)
+            )
         );
 
         if (url) {
@@ -44,7 +64,10 @@ function formatBotMessage(message) {
             fragment.appendChild(link);
         }
 
-        fragment.appendChild(document.createTextNode(trailing));
+        fragment.appendChild(
+            document.createTextNode(trailing)
+        );
+
         lastIndex = match.index + match[0].length;
     }
 
@@ -52,7 +75,7 @@ function formatBotMessage(message) {
         document.createTextNode(text.slice(lastIndex))
     );
 
-    content.replaceChildren(fragment);
+    content.appendChild(fragment);
     return content;
 }
 
@@ -73,7 +96,8 @@ function addMessage(message, type) {
 
     const name = document.createElement("div");
     name.className = "message-name";
-    name.textContent = type === "bot" ? "University Assistant" : "You";
+    name.textContent =
+        type === "bot" ? "University Assistant" : "You";
 
     content.appendChild(name);
 
@@ -115,9 +139,7 @@ async function sendQuestion() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                question: question
-            })
+            body: JSON.stringify({ question: question })
         });
 
         const data = await response.json();
