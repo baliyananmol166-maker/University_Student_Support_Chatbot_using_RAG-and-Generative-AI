@@ -706,3 +706,44 @@ body {
         max-width: 88%;
     }
 }
+/* ==========================================
+   CHATBOT RESPONSE FORMATTING
+========================================== */
+
+.message-text {
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.message-text p {
+    margin: 0 0 10px;
+}
+
+.message-text p:last-child {
+    margin-bottom: 0;
+}
+
+.message-text ol,
+.message-text ul {
+    margin: 8px 0 12px;
+    padding-left: 24px;
+}
+
+.message-text li {
+    margin-bottom: 6px;
+    padding-left: 3px;
+}
+
+.message-text strong {
+    font-weight: 700;
+}
+
+.message-text a {
+    color: #2563eb;
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.message-text a:hover {
+    text-decoration: none;
+}
